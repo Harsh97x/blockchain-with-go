@@ -23,9 +23,19 @@ func main() {
 		b.hash = hash[:]
 	}
 
+	func CreateBlock(data string, prevHash []byte) *Block {
+		block := &Block{[]byte{}, []byte(data), prevHash}
+		block.DeriveHash()
+		return block
+	}
+
 	func (chain *Blockchain) AddBlock (data string) {
 		prevblock := chain.blocks[len(chain.block-1)]
 		new := Createblock(data, prevblock)
 		chain.blocks := append(chain.blocks, new)
 	}
+
+	func Genesis() *Block {
+		return CreateBlock("Genesis", []byte{})
+	} 
 }
