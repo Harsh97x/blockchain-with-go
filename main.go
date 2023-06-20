@@ -42,3 +42,16 @@ func InitBlockChain() *BlockChain {
     return &BlockChain{[]*Block{Genesis()}}
 }
 
+func main() {
+	chain := InitBlockChain()
+
+	chain.AddBlock("first block after Genesis")
+	chain.AddBlock("second block after Genesis")
+	chain.AddBlock("third block after Genesis")
+
+	for _, block := range chain.blocks {
+		fmt.Printf("Previous hash: %x\n", block.Prevhash)
+		fmt.Printf("data: %s\n", block.Data)
+		fmt.Printf("hash: %x\n", block.Hash)
+	}
+}
