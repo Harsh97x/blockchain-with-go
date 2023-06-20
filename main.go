@@ -14,6 +14,18 @@ func main() {
 	}
 
 	type Blockchain struct {
-		Blocks []*Block
+		blocks []*Block
+	}
+
+	func (b *Block) derivehash () {
+		info := bytes.Join([][]byte{b.Data, b.Prevhash}, []byte{})
+		hash := sha256.Sum256(info)
+		b.hash = hash[:]
+	}
+
+	func (chain *Blockchain) AddBlock (data string) {
+		prevblock := chain.blocks[len(chain.block-1)]
+		new := Createblock(data, prevblock)
+		chain.blocks := append(chain.blocks, new)
 	}
 }
