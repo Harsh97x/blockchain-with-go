@@ -12,4 +12,8 @@ func main() {
 		Data     []byte
 		Prevhash []byte
 	}
+
+	type Blockchain struct {
+		Blocks []*Block
+	}
 }
