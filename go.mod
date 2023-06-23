@@ -2,4 +2,4 @@ module github.com/harsh97x/blockchainwithgo
 
 go 1.20
 
-require golang.org/x/crypto v0.10.0 // indirect
+require github.com/magefile/mage v1.15.0
