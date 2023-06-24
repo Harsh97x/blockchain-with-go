@@ -26,6 +26,24 @@ func NewProofOfWork (b *Block) *ProofOfWork {
 }
 
 func ToHex(num int64) []byte {
-	buff := new(byte.Buffer)
-	err := binary.Write()
+	buff := new(bytes.Buffer)
+	err := binary.Write(buff, binary.BigEndian, num)
+	if err != nil {
+		log.Panic(err)
+	}
+	return buff.Bytes()
 }
+
+func (pow *ProofOfWork) InitNonce (nonce int) []byte {
+	data := bytes.Join([][]byte{
+		pow.Block.Prevhash,
+		pow.Block.Data,
+		ToHex(int64(nonce)),
+		ToHex(int64(Difficulty)),
+	},
+		[]byte{},
+	)
+	return data
+}
+
+func ()
