@@ -46,4 +46,26 @@ func (pow *ProofOfWork) InitNonce (nonce int) []byte {
 	return data
 }
 
-func ()
+func (pow *ProofOfWork) Run () (int, []byte) {
+	var intHash big.Int
+	var hash [32] byte
+	
+	nonce := 0
+
+	for nonce < math.MaxInt64 {
+		data := pow.InitNonce(nonce)
+		hash = sha256.Sum256(data)
+
+		fmt.Println("\r%x", hash)
+		intHash.SetBytes(hash[:])
+
+		if intHash.Cmp(pow.Target) == -1 {
+			break
+		} else {
+			nonce++
+		}
+	}
+	fmt.Println()
+
+	return nonce, hash[:]
+}
